@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Http\Resources\StudentResource;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
@@ -74,10 +75,38 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'ime' => 'required|string',
+            'prezime' => 'required|string',
+            'email' => 'required|email',
+            'telefon' => 'required|string',
+		    'budzet' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $student = Student::find($id);
+
+        if ($student) {
+            $student->ime = $request->ime;
+            $student->prezime = $request->prezime;
+            $student->email = $request->email;
+            $student->telefon= $request->telefon;
+            $student->budzet = $request->budzet;
+
+
+            $student->save();
+
+            return response()->json(['Uspesno su sacuvane izmene studenta!',new StudentResource($student)]);
+        } else {
+            return response()->json('Ne moze se pronaci student sa zahtevanim id-em!');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -85,8 +114,15 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        if ($student) {
+            $student->delete();
+            return response()->json(['Uspesno brisanje!', new StudentResource($student)]);
+        } else {
+            return response()->json('Neuspesno brisanje, ID nije pronadjen');
+        }
     }
+
 }
