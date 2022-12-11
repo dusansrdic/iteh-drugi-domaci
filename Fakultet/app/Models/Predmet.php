@@ -10,6 +10,13 @@ class Predmet extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'naziv',
+        'sajt_predmeta',
+        'email',
+        'espb',
+    ];
+
     public function polaganja(){
         return $this->hasMany(Polaganje::class);
     }

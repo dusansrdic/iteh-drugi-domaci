@@ -7,9 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
 use App\Models\Predmet;
 
-class Predmet extends Model
+class Polaganje extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'datum',
+        'bodovi',
+        'ocena',
+        'napomena',
+	    'student_id',
+        'predmet_id'
+    ];
 
     public function student(){
         return $this->belongsTo(Student::class);

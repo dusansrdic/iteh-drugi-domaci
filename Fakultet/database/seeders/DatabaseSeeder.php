@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\StudentSeeder;
+use Database\Seeders\PredmetSeeder;
+use Database\Seeders\PolaganjeSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $ss = new StudentSeeder();
+        $prs = new Predmetseeder();
+        $pos = new PolaganjeSeeder();
+
+        $ss->run();
+        $prs->run();
+        $pos->run();
+
     }
 }

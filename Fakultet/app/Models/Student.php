@@ -10,6 +10,14 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'ime',
+        'prezime',
+        'email',
+        'telefon',
+        'budzet'
+    ];
+
     public function polaganja(){
         return $this->hasMany(Polaganje::class);
     }
