@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\StudentController;
+use App\Http\Controllers\API\PredmetController;
+use App\Http\Controllers\API\PolaganjeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('student',StudentController::class);
+Route::resource('predmet',PredmetController::class);
+Route::resource('polaganje',PolaganjeController::class);

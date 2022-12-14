@@ -20,8 +20,8 @@ class PolaganjeResource extends JsonResource
             'bodovi' => $this->resource->bodovi,
             'ocena'=> $this->resource->ocena,
             'napomena'=> $this->resource->napomena,
-            'student_id' => new StudentResource($this->resource->student_id),
-            'predmet_id' => new PredmetResource($this->resource->predmet_id)
+            'student' => new StudentResource($this->resource->student),
+            'predmet' => new PredmetResource($this->resource->predmet)
         ];
 
     }
